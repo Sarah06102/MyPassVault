@@ -16,3 +16,16 @@ scroll-behavior: smooth;
   opacity: 0;
   transform: translateY(0); 
 }
+
+@layer components {
+  .underline-animation {
+    @apply relative;
+  }
+
+  .underline-animation::after {
+    @apply absolute content-[''] w-full h-1 left-0 bottom-[-6px] bg-violet-400 scale-x-0 hover:scale-x-100 origin-bottom-right hover:origin-bottom-left transition transform duration-300
+  }
+  .underline-animation:hover::after {
+    @apply scale-x-100 origin-bottom-left;
+  }  
+}
