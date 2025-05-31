@@ -38,9 +38,26 @@ class Login(APIView):
 
 #Password Generator 
 def generate_random_password(request):
+    #Get from frontend
     length = int(request.GET.get('length', 10))
+    include_uppercase = request.GET.get('uppercase') == 'true'
+    include_lowercase = request.GET.get('lowercase') == 'true'
+    include_numbers = request.GET.get('numbers') == 'true'
+    include_symbols = request.GET.get('symbols') == 'true'
+
+    chars = ''
+    if include_uppercase:
+        chars += string.ascii_uppercase
+    if include_lowercase:
+        chars += string.ascii_lowercase
+    if include_numbers:
+        chars += string.digits
+    if include_symbols:
+        chars += string.punctuation
+    if not chars:
+        chars = string.ascii_letters + string.digits + string.punctuation
+
     password = []
-    chars = string.ascii_letters + string.digits + string.punctuation
     for char in range(length):
         password_chars = (random.choice(chars))
         password.append(password_chars)
