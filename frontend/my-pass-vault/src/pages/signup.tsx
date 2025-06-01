@@ -31,23 +31,20 @@ const SignUp: React.FC = () => {
             alert('Account created successfully!');
             navigate('/dashboard');
         } catch (err: any) {
-            if (err.response) {
-                const errData = await err.response.json();
-                console.error('Signup error:', errData);
+            let errMessage = 'Signup failed: Unknown error.';
+            
+            if (err.data) {
+                console.error('Signup error:', err.data);
 
-                //Check for invalid password
-                if (errData.error?.password) {
-                    setFormError(errData.error.password.join(' '));
-                }
-                //Check for email errors
-                else if (errData.error?.email) {
-                    setFormError(errData.error.email[0]);
-                } else {
-                    setFormError('Signup failed: Unknown error.');
+                if (err.data.error?.email) {
+                    errMessage = err.data.error.email[0];
+                } else if (err.data.message) {
+                    errMessage = err.data.message;
                 }
             } else {
-                setFormError('Signup failed: Network error.');
+                errMessage = 'Signup failed: Network error.';
             }
+            setFormError(errMessage);
         }
     };
 
@@ -78,7 +75,7 @@ const SignUp: React.FC = () => {
                     <div className="flex justify-center mb-4 px-4 py-3">
                         <button type="submit" className="cursor-pointer bg-violet-500 text-white p-2  px-8 rounded-3xl hover:bg-violet-700 transition ease-in-out duration-200">Sign Up</button>
                     </div>
-                    {formError && <p className="text-red-500 text-sm mt-1">{formError}</p>}
+                    {formError && <p className="text-red-500 text-sm mb-3 text-center">{formError}</p>}
                 </form>
             </div>
         </>

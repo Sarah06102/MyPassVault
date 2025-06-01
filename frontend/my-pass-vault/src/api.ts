@@ -17,11 +17,13 @@ export const signup = async (userData: SignUpData) => {
             body: JSON.stringify(userData),
         });
         if (!response.ok) {
-            const errorData  = await response.json();
-            throw new Error(errorData.message || 'Signup Failed');
+            const errData = await response.json();
+            const err: any = new Error(errData.message || 'Signup failed');
+            err.data = errData;
+            throw err;
         }
         return await response.json();
-    } catch(err) {
+    } catch (err) {
         console.error('Signup error:', err);
         throw err;
     }
@@ -40,12 +42,19 @@ export const login = async (userData: LoginData) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(userData),
+            
         });
         if (!response.ok) { 
             const errorData = await response.json();
-            throw new Error(errorData.message || 'Login failed');
+            const error: any = new Error(errorData.message || 'Login failed');
+            error.response = response;
+            error.data = errorData;
+            throw error;
         }
-        return response.json();
+        const data = await response.json();
+        console.log('Login API response:', data);
+        return data;
+        
     } catch(err) {
         console.error('Login error:', err);
         throw err;

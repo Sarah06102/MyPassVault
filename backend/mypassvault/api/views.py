@@ -8,6 +8,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 import random 
 import string
 from django.http import JsonResponse
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
@@ -30,13 +31,23 @@ class Login(APIView):
         if user is None:
             return Response({"message": "User does not exist."}, status=status.HTTP_404_NOT_FOUND)
         if not user.check_password(data['password']):
-            return Response({"message": "Password is incorrect."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message": "Invalid password."}, status=status.HTTP_400_BAD_REQUEST)
         
         token = RefreshToken.for_user(user)
-        return Response({"message": "Login Successful", "Success": True, "token": str(token)})
+        return Response({"message": "Login Successful", "Success": True, "token": str(token), "access": str(token.access_token),})
         
+class UserProfileView(APIView):
+    permission_classes = [IsAuthenticated]
 
-#Password Generator 
+    def get(self, request):
+        user = request.user
+        return Response({
+            "email": user.email,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+        })
+
+#Password Generator
 def generate_random_password(request):
     #Get from frontend
     length = int(request.GET.get('length', 10))

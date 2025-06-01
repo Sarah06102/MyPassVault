@@ -23,24 +23,23 @@ const Login: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await login(formData);
+            const data = await login(formData);
+            localStorage.setItem('access_token', data.access);
             alert('Login successful!');
             navigate('/dashboard');
         } catch (err: any) {
-        if (err.response) {
-            const errData = await err.response.json();
-            console.error('Login error:', errData);
-
-            if (errData.error?.password) {
-            setFormError(errData.error.password.join(' '));
-            } else if (errData.error?.email) {
-            setFormError(errData.error.email[0]);
+            let errMessage = 'Login failed: Unknown error.';
+            
+            if (err.data) {
+                console.error('Login error:', err.data);
+                    
+                if (err.data.message) {
+                    errMessage = err.data.message;
+                }
             } else {
-            setFormError('Login failed: Unknown error.');
+                errMessage = 'Login failed: Network error.';
             }
-        } else {
-            setFormError('Login failed: Network error.');
-        }
+            setFormError(errMessage);
         }
     };
 
@@ -63,7 +62,7 @@ const Login: React.FC = () => {
                     <div className="flex justify-center mb-4 px-4 py-3">
                         <button type="submit" className="cursor-pointer bg-violet-500 text-white p-2  px-8 rounded-3xl hover:bg-violet-700 transition ease-in-out duration-200">Login</button>
                     </div>
-                    {formError && <p className="text-red-500 text-sm mt-1">{formError}</p>}
+                    {formError && <p className="text-red-500 text-sm text-center mb-3">{formError}</p>}
                 </form>
             </div>
         </>
