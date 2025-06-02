@@ -110,14 +110,17 @@ const Dashboard: React.FC = () => {
                             <div className="absolute pt-40 right-0 left-170 p-4 flex flex-col justify-start">
                                 <div className="mt-10 bg-white p-4 rounded-xl shadow-md border border-gray-300 flex flex-col gap-3 w-80"> 
                                     <h3 className="font-semibold text-lg">Add New Password</h3>
-                                    <input type="text" placeholder="Site Name" value={newEntryData.site_name} onChange={(e) => setNewEntryData({ ...newEntryData, site_name: e.target.value })} className="border p-2 rounded"/>
-                                    <select value={newEntryData.domain_extension || ".com"} onChange={(e) => setNewEntryData({...newEntryData, domain_extension: e.target.value,})} className="border p-2 rounded">
-                                        <option value=".com">.com</option>
-                                        <option value=".ca">.ca</option>
-                                        <option value=".org">.org</option>
-                                        <option value=".net">.net</option>
-                                        <option value=".edu">.edu</option>
-                                    </select>
+                                    
+                                    <div className="flex gap-2">
+                                        <input type="text" placeholder="Site Name" value={newEntryData.site_name} onChange={(e) => setNewEntryData({ ...newEntryData, site_name: e.target.value })} className="border p-2 rounded"/>
+                                        <select value={newEntryData.domain_extension || ".com"} onChange={(e) => setNewEntryData({...newEntryData, domain_extension: e.target.value,})} className="border p-2 rounded">
+                                            <option value=".com">.com</option>
+                                            <option value=".ca">.ca</option>
+                                            <option value=".org">.org</option>
+                                            <option value=".net">.net</option>
+                                            <option value=".edu">.edu</option>
+                                        </select>
+                                    </div>
                                     <input type="email" placeholder="Email" value={newEntryData.email} onChange={(e) => setNewEntryData({ ...newEntryData, email: e.target.value })} className="border p-2 rounded"/>
                                     <input type="password" placeholder="Password" value={newEntryData.password} onChange={(e) => setNewEntryData({ ...newEntryData, password: e.target.value })} className="border p-2 rounded"/>
                                     <textarea placeholder="Notes (optional)" value={newEntryData.notes} onChange={(e) => setNewEntryData({ ...newEntryData, notes: e.target.value })} className="border p-2 rounded"/>
@@ -129,7 +132,7 @@ const Dashboard: React.FC = () => {
                 </div>
             </div>
             {/* Password Entries */}
-            <div className="mt-50 ml-6 px-10 grid grid-cols-1 md:grid-cols-5">
+            <div className="mt-60 ml-6 px-10 grid grid-cols-1 md:grid-cols-5">
                 {passwordEntries.filter((entry) => entry.site_name.toLowerCase().includes(searchTerm.toLowerCase())).map((entry) => (
                     <div key={entry.id} className="rounded-xl bg-white p-4 shadow-md flex flex-col items-start gap-2 max-w-xs">
                         
@@ -161,6 +164,7 @@ const Dashboard: React.FC = () => {
                                 <button onClick={() => setEditingEntry((prev) => ({ ...prev, [entry.id]: true }))} className="text-violet-500 hover:bg-violet-100 cursor-pointer px-2 py-1 rounded-4xl transition-all duration-300 ease-in-out">Update</button>
                             )}
                         </div>
+                        <p className="text-xs text-gray-400">Created: {new Date(entry.created_at).toLocaleString()}</p>
                     </div>
                 ))}
             </div>
