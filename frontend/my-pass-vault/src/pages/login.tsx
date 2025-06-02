@@ -3,9 +3,11 @@ import { login } from '../api';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/nav-bar';
 import type { LoginData } from '../api';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
 
     const [formData, setFormData] = useState<LoginData>({
         email: '',
@@ -57,7 +59,10 @@ const Login: React.FC = () => {
                     </div>
                     <div className="flex flex-col px-8 py-1">
                         <label htmlFor="password" className="mb-1 text-sm font-medium">Password</label>
-                        <input className="p-2 border border-gray-400 rounded-lg" value={formData.password} type="password" name="password" placeholder="Enter your password" onChange={handleChange} required/>
+                        <div className="relative flex items-center">
+                            <input className="p-2 border border-gray-400 rounded-lg w-full pr-10" type={showPassword ? "text" : "password"} value={formData.password} name="password" placeholder="Enter your password" onChange={handleChange} required/>
+                            <button type="button" onClick={() => setShowPassword((prev) => !prev)} className="cursor-pointer absolute right-3 text-gray-400 hover:text-gray-700">{showPassword ? <FaEyeSlash /> : <FaEye />}</button>
+                        </div>
                     </div>
                     <div className="flex justify-center mb-4 px-4 py-3">
                         <button type="submit" className="cursor-pointer bg-violet-500 text-white p-2  px-8 rounded-3xl hover:bg-violet-700 transition ease-in-out duration-200">Login</button>

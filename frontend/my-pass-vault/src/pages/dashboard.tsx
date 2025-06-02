@@ -90,7 +90,7 @@ const Dashboard: React.FC = () => {
             <DashboardNavBar first_name={userFirstName} last_name={userLastName} email={userEmail} onLogout={handleLogout}/>
 
             {/* Greeting */}
-            <div className="items-center mt-25 flex pl-15 gap-4">
+            <div className="items-center mt-25 flex pl-15 gap-12">
                 <div className="bg-white flex relative flex-col p-15 gap-3 border rounded-3xl border-gray-300 shadow-md">
                     <h1 className="font-extrabold text-3xl">Hi, {userFirstName || 'Loading...'}!</h1>
                     <p className="text-gray-500">Welcome to MyPassVault, your personal password manager.<br></br> Here, you can save your own passwords or generated passwords for different platforms.</p>
@@ -107,7 +107,7 @@ const Dashboard: React.FC = () => {
                         </div>
                         
                         {showAddForm && (
-                            <div className="absolute pt-40 right-0 left-170 p-4 flex flex-col justify-start">
+                            <div className="absolute pt-40 right-0 left-160 p-4 flex flex-col justify-start">
                                 <div className="mt-10 bg-white p-4 rounded-xl shadow-md border border-gray-300 flex flex-col gap-3 w-80"> 
                                     <h3 className="font-semibold text-lg">Add New Password</h3>
                                     
