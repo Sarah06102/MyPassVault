@@ -106,7 +106,8 @@ export const fetchWithRefresh = async (url: string, options: any = {}) => {
 
     if (response.status === 401) {
         const refresh = localStorage.getItem('refresh_token');
-        const refreshResponse = await fetch('/api/token/refresh/', {
+        console.log("refresh_token", localStorage.getItem('refresh_token'));
+        const refreshResponse = await fetch(`${apiUrl}/token/refresh/`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ refresh }),
@@ -115,7 +116,10 @@ export const fetchWithRefresh = async (url: string, options: any = {}) => {
         if (refreshResponse.ok) {
             const refreshData = await refreshResponse.json();
             localStorage.setItem('access_token', refreshData.access);
-      
+            if (refreshData.refresh) { 
+                localStorage.setItem('refresh_token', refreshData.refresh);
+            }
+
             response = await fetch(url, {
                 ...options,
                 headers: {

@@ -15,6 +15,7 @@ const Dashboard: React.FC = () => {
     const [newEntryUpdates, setNewEntryUpdates] = useState<{ [key: number]: { email: string; password: string } }>({});
     const [editingEntry, setEditingEntry] = useState<{ [key: number]: boolean }>({});
     const [showAddForm, setShowAddForm] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -85,10 +86,13 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-        <div className="bg-violet-50 min-h-screen w-full overflow-hidden">
+        
+        <div className="bg-violet-50 min-h-screen w-full overflow-hidden relative z-0">
             {/* Navbar */}
-            <DashboardNavBar first_name={userFirstName} last_name={userLastName} email={userEmail} onLogout={handleLogout}/>
-
+            <DashboardNavBar first_name={userFirstName} last_name={userLastName} email={userEmail} onLogout={handleLogout} isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen}/>
+            {isSidebarOpen && (
+                <div className={`fixed inset-0 backdrop-blur-sm bg-opacity-30 z-40 transition-opacity duration-300 ease-in-out ${isSidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}></div>
+            )}
             {/* Greeting */}
             <div className="items-center mt-25 flex pl-15 gap-12">
                 <div className="bg-white flex relative flex-col p-15 gap-3 border rounded-3xl border-gray-300 shadow-md">
@@ -167,10 +171,7 @@ const Dashboard: React.FC = () => {
                         <p className="text-xs text-gray-400">Created: {new Date(entry.created_at).toLocaleString()}</p>
                     </div>
                 ))}
-            </div>
-            {/* Add Entry */}
-
-            
+            </div>      
         </div>
     </>
   )

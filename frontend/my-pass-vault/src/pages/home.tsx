@@ -95,7 +95,7 @@ const Home: React.FC<HomeProps> = ({ title }) => {
               </div>
             </div>
         
-          {/* Password Generator */}
+            {/* Password Generator */}
             <div className="bg-white rounded-2xl shadow-lg p-18 flex flex-col gap-6">
               {/* Checkbox options */}
               <div className="grid grid-cols-2 gap-x-4 gap-y-2">
@@ -124,7 +124,7 @@ const Home: React.FC<HomeProps> = ({ title }) => {
                   <input className="w-14 p-1 border border-gray-300 rounded text-center shadow-inner" id="lengthInput" type="number" min="4" max="36" value={length} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newLength = Number(e.target.value); if (newLength >= 4 && newLength <= 36) {
                     setLength(newLength);}}} />
                   {/* Slider */}
-                  <input id="lengthSlider" className="accent-violet-600 w-64" type="range" min="4" max="36" value={length} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setLength(Number(e.target.value))}/>
+                  <input id="lengthSlider" className="cursor-pointer accent-violet-600 w-64" type="range" min="4" max="36" value={length} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setLength(Number(e.target.value))}/>
                 </div>
 
                 {/* Show Password */}
@@ -133,8 +133,8 @@ const Home: React.FC<HomeProps> = ({ title }) => {
                   <span className="ml-2 shadow-inner border px-3 border-gray-300 rounded">{generatedPassword ? generatedPassword : null}</span>
                 </div>
                 <div className="flex gap-2 mt-10">
-                  <button className="cursor-pointer hover:bg-violet-700 transition-colors duration-300 flex bg-violet-600 text-white py-2 px-3 rounded-3xl" onClick={handleCopyPassword}>Copy password</button>
-                  <button className="cursor-pointer hover:bg-violet-200 transition-colors duration-300 flex bg-violet-100 text-violet-600 py-2 px-3 rounded-3xl" onClick={handleRefreshPassword}>Regenerate password</button>
+                  <button className="cursor-pointer hover:bg-violet-700 transition-colors duration-300 flex bg-violet-600 text-white py-2 px-3 rounded-full" onClick={handleCopyPassword}>Copy password</button>
+                  <button className="cursor-pointer hover:bg-violet-200 transition-colors duration-300 flex bg-violet-100 text-violet-600 py-2 px-3 rounded-full" onClick={handleRefreshPassword}>Regenerate password</button>
                 </div>
               </div>
             </div>

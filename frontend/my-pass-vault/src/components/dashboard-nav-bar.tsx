@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaUserCircle } from "react-icons/fa";
 import { FaBars, FaTimes } from 'react-icons/fa';
@@ -9,12 +9,13 @@ interface DashboardNavBarProps {
     onLogout: () => void;
     first_name: string;
     last_name: string;
+    isSidebarOpen: boolean;
+    setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const DashboardNavBar: React.FC<DashboardNavBarProps> = ({ first_name, last_name, email, onLogout }) => {
+const DashboardNavBar: React.FC<DashboardNavBarProps> = ({ first_name, last_name, email, onLogout, isSidebarOpen, setIsSidebarOpen }) => {
     const navigate = useNavigate(); 
-    const [isOpen, setIsOpen] = useState(false);
-    const toggleSidebar = () => setIsOpen(!isOpen);
+    const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
     
     const handleNavigation = (sectionId: string) => {
         if (location.pathname === '/') {
@@ -36,12 +37,12 @@ const DashboardNavBar: React.FC<DashboardNavBarProps> = ({ first_name, last_name
     
   return (
     <>
-        <Sidebar isOpen={isOpen} onClose={() => setIsOpen(false)} />
+        <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
         <nav className="fixed top-0 left-0 w-full z-50">
             <div className="justify-between py-4 px-8 space-x-6 text-white flex items-center bg-violet-700">
                 <div className="flex items-start gap-6 justify-center">
                     <button onClick={toggleSidebar} className="text-white text-2xl cursor-pointer focus:outline-none z-50 mt-0.5">
-                        {isOpen ? <FaTimes /> : <FaBars />}
+                        {isSidebarOpen ? <FaTimes /> : <FaBars />}
                     </button>
                     <button onClick={() => handleNavigation('dashboard')} className="cursor-pointer font-bold text-xl">MyPassVault</button>
                 </div>

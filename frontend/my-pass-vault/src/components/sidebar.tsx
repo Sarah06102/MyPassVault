@@ -2,7 +2,6 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FaTimes, FaKey } from 'react-icons/fa';
 import { IoShieldCheckmark, IoSettingsSharp } from "react-icons/io5";
-import { IoMdAdd } from "react-icons/io";
 import { RiPencilFill } from "react-icons/ri";
 import { MdOutlineHelp } from "react-icons/md";
 
@@ -20,7 +19,7 @@ const Sidebar: React.FC<SidebarProps>= ({ isOpen, onClose }) => {
   return (
     <>
         {/* Sidebar Panel */}
-        <div className={`fixed top-0 left-0 h-full w-80 bg-violet-700 shadow-lg z-40 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
+        <div className={`fixed top-0 left-0 h-full w-80 bg-violet-700 shadow-lg z-50 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-violet-600">
                 <button onClick={onClose} className="text-white text-xl">
