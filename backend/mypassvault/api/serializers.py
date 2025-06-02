@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser 
+from .models import CustomUser, PasswordEntry
 
 class SignUpSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(required=True)
@@ -33,3 +33,9 @@ class SignUpSerializer(serializers.ModelSerializer):
         if CustomUser.objects.filter(email=value).exists():
             raise serializers.ValidationError("A user with this email already exists.")
         return value
+    
+class PasswordEntrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PasswordEntry
+        fields = '__all__'
+        read_only_fields = ['created_at', 'logo_url', 'user']

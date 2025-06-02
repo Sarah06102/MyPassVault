@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import BaseUserManager
+from django.conf import settings
+import requests
 
 # Create your models here.
 
@@ -55,3 +57,26 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+    
+class PasswordEntry(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='password_entries')
+    site_name = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    password = models.CharField(max_length=255)
+    logo_url = models.URLField(blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.logo_url and self.site_name:
+            company = self.site_name.lower().replace(" ", "")
+            logo_url = f"https://logo.clearbit.com/{company}.com"
+
+            response = requests.head(logo_url)
+            if response.status_code == 200:
+                self.logo_url = logo_url
+
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.site_name} - {self.email}"

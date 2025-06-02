@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { FaTimes, FaTachometerAlt, FaKey } from 'react-icons/fa';
+import { FaTimes, FaKey } from 'react-icons/fa';
 import { IoShieldCheckmark, IoSettingsSharp } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
 import { RiPencilFill } from "react-icons/ri";

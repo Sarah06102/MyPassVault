@@ -60,3 +60,45 @@ export const login = async (userData: LoginData) => {
         throw err;
     }
 };
+
+export const fetchPassword = async (token: string) => {
+    const response = await fetch (`${apiUrl}/passwords/`, {
+        headers: {Authorization: `Bearer ${token}`},
+    });
+    if (!response.ok) throw new Error('Failed to fetch passwords.');
+    return response.json();
+};
+
+export const createPassword = async (data:any, token:string) => {
+    const response = await fetch(`${apiUrl}/passwords/`, {
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+    if (!response.ok) throw new Error('Failed to create password.');
+    return response.json();
+};
+
+export const updatePassword = async (id: number, data: any, token: string) => {
+    const response = await fetch(`${apiUrl}/passwords/${id}/`, {
+        method:'PUT',
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+    if (!response.ok) throw new Error('Failed to update password.');
+    return response.json();
+};
+
+export const deletePassword = async (id: number, token: string) => {
+    const response = await fetch(`${apiUrl}/passwords/${id}/`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}`},
+    });
+    if (!response.ok) throw new Error('Failed to delete password.');
+};
