@@ -86,8 +86,9 @@ class PasswordEntryListCreateAPIView(APIView):
     def post(self, request):
         serializer = PasswordEntrySerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            password_entry = serializer.save(user=request.user)
+            updated_serializer = PasswordEntrySerializer(password_entry)
+            return Response(updated_serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PasswordEntryRetrieveUpdateDeleteAPIView(APIView):

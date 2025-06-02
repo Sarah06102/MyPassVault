@@ -61,44 +61,74 @@ export const login = async (userData: LoginData) => {
     }
 };
 
-export const fetchPassword = async (token: string) => {
-    const response = await fetch (`${apiUrl}/passwords/`, {
-        headers: {Authorization: `Bearer ${token}`},
-    });
+export const fetchPassword = async () => {
+    const response = await fetchWithRefresh(`${apiUrl}/passwords/`);
     if (!response.ok) throw new Error('Failed to fetch passwords.');
     return response.json();
 };
 
-export const createPassword = async (data:any, token:string) => {
-    const response = await fetch(`${apiUrl}/passwords/`, {
+export const createPassword = async (data: any) => {
+    const response = await fetchWithRefresh(`${apiUrl}/passwords/`, {
         method: 'POST',
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
     });
     if (!response.ok) throw new Error('Failed to create password.');
     return response.json();
 };
 
-export const updatePassword = async (id: number, data: any, token: string) => {
-    const response = await fetch(`${apiUrl}/passwords/${id}/`, {
+export const updatePassword = async (id: number, data: any) => {
+    const response = await fetchWithRefresh(`${apiUrl}/passwords/${id}/`, {
         method:'PUT',
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
     });
     if (!response.ok) throw new Error('Failed to update password.');
     return response.json();
 };
 
-export const deletePassword = async (id: number, token: string) => {
-    const response = await fetch(`${apiUrl}/passwords/${id}/`, {
+export const deletePassword = async (id: number) => {
+    const response = await fetchWithRefresh(`${apiUrl}/passwords/${id}/`, {
         method: 'DELETE',
-        headers: { Authorization: `Bearer ${token}`},
     });
     if (!response.ok) throw new Error('Failed to delete password.');
 };
+
+export const fetchWithRefresh = async (url: string, options: any = {}) => {
+    let token = localStorage.getItem('access_token');
+    
+    let response = await fetch(url, {
+        ...options,
+        headers: {
+          ...options.headers,
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+    });
+
+    if (response.status === 401) {
+        const refresh = localStorage.getItem('refresh_token');
+        const refreshResponse = await fetch('/api/token/refresh/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ refresh }),
+        });
+
+        if (refreshResponse.ok) {
+            const refreshData = await refreshResponse.json();
+            localStorage.setItem('access_token', refreshData.access);
+      
+            response = await fetch(url, {
+                ...options,
+                headers: {
+                    ...options.headers,
+                    Authorization: `Bearer ${refreshData.access}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            } else {
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+                window.location.href = '/login';
+            }
+        }
+        return response;
+    };

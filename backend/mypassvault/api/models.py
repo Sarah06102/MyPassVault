@@ -66,16 +66,36 @@ class PasswordEntry(models.Model):
     logo_url = models.URLField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    domain_extension = models.CharField(max_length=10, default='.com')
 
     def save(self, *args, **kwargs):
         if not self.logo_url and self.site_name:
-            company = self.site_name.lower().replace(" ", "")
-            logo_url = f"https://logo.clearbit.com/{company}.com"
+            extension = getattr(self, 'domain_extension', '.com')
+            site_cleaned = self.site_name.lower().replace(' ', '')
+            
+            if site_cleaned.endswith(extension):
+                company = site_cleaned
+            else:
+                company = f"{site_cleaned}{extension}"
 
-            response = requests.head(logo_url)
-            if response.status_code == 200:
-                self.logo_url = logo_url
+            token = "pk_fOShpbENQ2uR25M_0i-J1Q"
 
+            logo_url = f"https://img.logo.dev/{company}?token={token}"
+
+            try:
+                response = requests.get(logo_url)
+                print("Checking logo for:", company)
+                print("GET status code:", response.status_code)        
+                
+                if response.status_code == 200:
+                    self.logo_url = logo_url
+                else:
+                    self.logo_url = ""
+
+            except requests.exceptions.RequestException as e:
+                print("Error checking logo URL:", e)
+                self.logo_url = ""
+                
         super().save(*args, **kwargs)
 
     def __str__(self):
