@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import ssl
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -100,11 +99,11 @@ WSGI_APPLICATION = 'mypassvault.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('PGDATABASE'),
-        'USER': os.environ.get('PGUSER'),
-        'PASSWORD': os.environ.get('PGPASSWORD'),
-        'HOST': os.environ.get('PGHOST'),
-        'PORT': os.environ.get('PGPORT'),
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'VpWptWmKKkQgrkJkQtMTKmayWYFUbcWU',
+        'HOST': 'postgres.railway.internal',
+        'PORT': '5432',
     }
 }
 
