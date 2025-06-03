@@ -70,15 +70,15 @@ const GeneratePassword: React.FC = () => {
             <div className={`fixed inset-0 backdrop-blur-sm bg-opacity-30 z-40 transition-opacity duration-300 ease-in-out ${isSidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}></div>
         )}
         
-        <div className="flex justify-center mt-35  mb-20">
+        <div className="flex justify-center mt-35">
           <div className="bg-white flex relative flex-col p-10 gap-3 border rounded-3xl border-gray-300 shadow-md">
             <h1 className="font-extrabold text-3xl">Generate Strong Passwords</h1>
             <p className="text-gray-500">Create secure, unique passwords for your accounts, and manage them all in one place.</p>
           </div>
         </div>
 
-        {/* Checkbox options */}
-        <div className="flex justify-center items-center mt-20 ">
+        {/* Password Generator */}
+        <div className="flex justify-center items-center mt-20 mb-20">
           <div className="bg-white rounded-2xl shadow-lg p-10 w-full max-w-2xl flex flex-col items-center border border-gray-300">
             <h2 className="font-bold text-2xl mb-4">Password Generator</h2>
             <div className="grid grid-cols-2 gap-x-10 gap-y-2 pt-3">
