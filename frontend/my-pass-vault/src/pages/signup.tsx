@@ -4,7 +4,7 @@ import NavBar from '../components/nav-bar';
 import { signup } from '../api'; 
 import type { SignUpData } from '../api';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-
+import { login } from '../api';
 
 const SignUp: React.FC = () => {
     const navigate = useNavigate();
@@ -31,6 +31,9 @@ const SignUp: React.FC = () => {
         try {
             await signup(formData);
             alert('Account created successfully!');
+            const loginData = await login({ email: formData.email, password: formData.password });
+            localStorage.setItem('access_token', loginData.access);
+            localStorage.setItem('refresh_token', loginData.refresh);
             navigate('/dashboard');
         } catch (err: any) {
             let errMessage = 'Signup failed: Unknown error.';
