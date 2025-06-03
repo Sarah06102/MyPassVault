@@ -31,7 +31,7 @@ ALLOWED_HOSTS = [
     'mypassvault-production.up.railway.app',
     'localhost',
     '127.0.0.1',
-    'mypassvault-production.up.railway.app'
+    'my-pass-vault.vercel.app',
 ]
 
 
