@@ -9,7 +9,7 @@ export interface SignUpData {
 
 export const signup = async (userData: SignUpData) => {
     try {
-        const response = await fetch(`${apiUrl}/api/signup/`, {
+        const response = await fetch(`${apiUrl}/signup/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export interface LoginData {
 
 export const login = async (userData: LoginData) => {
     try {
-        const response = await fetch(`${apiUrl}/api/login/`, {
+        const response = await fetch(`${apiUrl}/login/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -62,13 +62,13 @@ export const login = async (userData: LoginData) => {
 };
 
 export const fetchPassword = async () => {
-    const response = await fetchWithRefresh(`/api/passwords/`);
+    const response = await fetchWithRefresh(`/passwords/`);
     if (!response.ok) throw new Error('Failed to fetch passwords.');
     return response.json();
 };
 
 export const createPassword = async (data: any) => {
-    const response = await fetchWithRefresh(`/api/passwords/`, {
+    const response = await fetchWithRefresh(`/passwords/`, {
         method: 'POST',
         body: JSON.stringify(data),
     });
@@ -77,7 +77,7 @@ export const createPassword = async (data: any) => {
 };
 
 export const updatePassword = async (id: number, data: any) => {
-    const response = await fetchWithRefresh(`/api/passwords/${id}/`, {
+    const response = await fetchWithRefresh(`/passwords/${id}/`, {
         method:'PUT',
         body: JSON.stringify(data),
     });
@@ -86,7 +86,7 @@ export const updatePassword = async (id: number, data: any) => {
 };
 
 export const deletePassword = async (id: number) => {
-    const response = await fetchWithRefresh(`/api/passwords/${id}/`, {
+    const response = await fetchWithRefresh(`/passwords/${id}/`, {
         method: 'DELETE',
     });
     if (!response.ok) throw new Error('Failed to delete password.');
