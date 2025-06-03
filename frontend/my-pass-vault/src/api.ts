@@ -95,12 +95,16 @@ export const deletePassword = async (id: number) => {
 export const fetchWithRefresh = async (url: string, options: any = {}) => {
     let token = localStorage.getItem('access_token');
     
+    const defaultHeaders: any = {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    };
+
     let response = await fetch(url, {
         ...options,
         headers: {
           ...options.headers,
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
         },
     });
 
@@ -135,4 +139,4 @@ export const fetchWithRefresh = async (url: string, options: any = {}) => {
             }
         }
         return response;
-    };
+};
