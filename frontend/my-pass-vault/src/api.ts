@@ -9,7 +9,7 @@ export interface SignUpData {
 
 export const signup = async (userData: SignUpData) => {
     try {
-        const response = await fetch(`${apiUrl}/signup/`, {
+        const response = await fetch(`${apiUrl}/api/signup/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export interface LoginData {
 
 export const login = async (userData: LoginData) => {
     try {
-        const response = await fetch(`${apiUrl}/login/`, {
+        const response = await fetch(`${apiUrl}/api/login/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ export const createPassword = async (data: any) => {
 };
 
 export const updatePassword = async (id: number, data: any) => {
-    const response = await fetchWithRefresh(`/passwords/${id}/`, {
+    const response = await fetchWithRefresh(`/api/passwords/${id}/`, {
         method:'PUT',
         body: JSON.stringify(data),
     });
