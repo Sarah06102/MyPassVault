@@ -27,7 +27,11 @@ SECRET_KEY = 'django-insecure-!$crmupo6_w_(vso#-j)*-gz-be17f%d2a+sgsjb)ehg19n7bi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'mypassvault-production.up.railway.app',
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
