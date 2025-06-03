@@ -31,6 +31,7 @@ ALLOWED_HOSTS = [
     'mypassvault-production.up.railway.app',
     'localhost',
     '127.0.0.1',
+    'mypassvault-production.up.railway.app'
 ]
 
 
@@ -52,11 +53,11 @@ INSTALLED_APPS = [
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
-    "https://my-pass-vault.vercel.app"
+    'https://my-pass-vault.vercel.app',
     ]
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173',
-    "https://my-pass-vault.vercel.app"
+    'https://my-pass-vault.vercel.app'
     ]
 
 MIDDLEWARE = [
