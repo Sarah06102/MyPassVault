@@ -70,7 +70,7 @@ const GeneratePassword: React.FC = () => {
             <div className={`fixed inset-0 backdrop-blur-sm bg-opacity-30 z-40 transition-opacity duration-300 ease-in-out ${isSidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}></div>
         )}
         
-        <div className="flex justify-center mt-35">
+        <div className="flex justify-center mt-35  mb-20">
           <div className="bg-white flex relative flex-col p-10 gap-3 border rounded-3xl border-gray-300 shadow-md">
             <h1 className="font-extrabold text-3xl">Generate Strong Passwords</h1>
             <p className="text-gray-500">Create secure, unique passwords for your accounts, and manage them all in one place.</p>

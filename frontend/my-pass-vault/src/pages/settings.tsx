@@ -62,7 +62,7 @@ const Settings: React.FC  = () => {
       <div className="bg-violet-50 min-h-screen w-full overflow-hidden relative z-0">
         <DashboardNavBar first_name={userFirstName} last_name={userLastName} email={userEmail} onLogout={handleLogout} isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen}/>
 
-        <div className="flex justify-center mt-40">
+        <div className="flex justify-center mt-40  mb-20">
           <div className="bg-white rounded-2xl shadow-lg p-10 w-full max-w-2xl flex flex-col gap-6">
             <h1 className="text-2xl font-bold text-center">Account Settings</h1>
             <form onSubmit={handleUpdateProfile} className="flex flex-col gap-4">
