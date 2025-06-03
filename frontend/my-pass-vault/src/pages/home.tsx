@@ -25,6 +25,20 @@ const Home: React.FC<HomeProps> = ({ title }) => {
   const toggleFAQ = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   }
+
+  useEffect(() => {
+    const scrollToHash = () => {
+      if (window.location.hash) {
+        const id = window.location.hash.substring(1);
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    };
+  
+    scrollToHash();
+  }, []);
   
   //Fetching generated password from backend
   const fetchPassword = async (length: number) => {
@@ -206,7 +220,7 @@ const Home: React.FC<HomeProps> = ({ title }) => {
           
           <div className="space-y-4">
             {questionsForFaq.map((faq, index) => (
-              <div key={index} className="border rounded-lg border-gray-400 overflow-hidden shadow-sm">
+              <div key={index} className="bg-white border rounded-lg border-gray-300 overflow-hidden shadow-sm">
                 <button onClick={() => toggleFAQ(index)} className="w-full text-left flex justify-between items-center p-4 font-medium text-gray-700 hover:text-violet-300 cursor-pointer">
                   <span>{faq.question}</span>
                   <svg className={`transform transition-transform duration-300 ${activeIndex === index ? 'rotate-180' : ''}`} width="20" height="20" viewBox="0 0 20 20">

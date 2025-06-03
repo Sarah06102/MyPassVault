@@ -39,3 +39,5 @@ class PasswordEntrySerializer(serializers.ModelSerializer):
         model = PasswordEntry
         fields = '__all__'
         read_only_fields = ['created_at', 'logo_url', 'user']
+
+        

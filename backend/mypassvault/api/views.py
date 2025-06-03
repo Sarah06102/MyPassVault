@@ -9,6 +9,8 @@ import random
 import string
 from django.http import JsonResponse
 from rest_framework.permissions import IsAuthenticated
+from django.views.decorators.csrf import ensure_csrf_cookie
+
 
 # Create your views here.
 
@@ -124,3 +126,7 @@ class PasswordEntryRetrieveUpdateDeleteAPIView(APIView):
             return Response({"error": "Not found"}, status=status.HTTP_404_NOT_FOUND)
         entry.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+@ensure_csrf_cookie
+def get_csrf_token(request):
+    return JsonResponse({'message': 'CSRF token set'})

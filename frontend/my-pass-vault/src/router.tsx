@@ -7,6 +7,7 @@ import Security from "./pages/security.tsx";
 import GeneratePassword from "./pages/generate-password.tsx";
 import Settings from "./pages/settings.tsx";
 import Help from "./pages/help.tsx";
+import ResetPassword from './pages/reset-password.tsx';
 
 export const router = createBrowserRouter([
     { path: "/", element: <Home title="MyPassVault"/>}, 
@@ -17,4 +18,5 @@ export const router = createBrowserRouter([
     { path: "/generate-password", element: <GeneratePassword/>},
     { path: "/settings", element: <Settings />},
     { path: "/help", element: <Help />},
+    { path: "/reset-password", element: <ResetPassword /> },
   ]);

@@ -53,32 +53,35 @@ const SignUp: React.FC = () => {
     return (
         <>
             <NavBar/>
-            <div className="flex flex-col items-center justify-center min-h-screen">
+            <div className="bg-violet-50 flex flex-col items-center justify-center min-h-screen">
                 <form onSubmit={handleSubmit} className="bg-white rounded shadow-md w-full max-w-md space-y-4">
                     <div className="w-full">
                         <h1 className="rounded-t font-semibold text-lg w-full text-center  bg-violet-500 text-white p-3">Create an Account</h1>
                     </div>
                     <div className="flex flex-col px-8 py-1">
                         <label htmlFor="first_name" className="mb-1 text-sm font-medium">First Name</label>
-                        <input className="p-2 border border-gray-400 rounded-lg" value={formData.first_name} type="text" name="first_name" placeholder="Enter your first name" onChange={handleChange} required/>
+                        <input className="p-2 border border-gray-400 rounded-full" value={formData.first_name} type="text" name="first_name" placeholder="Enter your first name" onChange={handleChange} required/>
                     </div>
                     <div className="flex flex-col px-8 py-1">
                         <label htmlFor="last_name" className="mb-1 text-sm font-medium">Last Name</label>
-                        <input className="p-2 border border-gray-400 rounded-lg" value={formData.last_name} type="text" name="last_name" placeholder="Enter your last name" onChange={handleChange} required/>
+                        <input className="p-2 border border-gray-400 rounded-full" value={formData.last_name} type="text" name="last_name" placeholder="Enter your last name" onChange={handleChange} required/>
                     </div>
                     <div className="flex flex-col px-8 py-1">
                         <label htmlFor="email" className="mb-1 text-sm font-medium">Email</label>
-                        <input className="p-2 border border-gray-400 rounded-lg" value={formData.email} type="email" name="email" placeholder="Enter your email" onChange={handleChange} required/>
+                        <input className="p-2 border border-gray-400 rounded-full" value={formData.email} type="email" name="email" placeholder="Enter your email" onChange={handleChange} required/>
                     </div>
                     <div className="flex flex-col px-8 py-1">
                         <label htmlFor="password" className="mb-1 text-sm font-medium">Password</label>
                         <div className="relative flex items-center">
-                            <input className="p-2 border border-gray-400 rounded-lg w-full pr-10" value={formData.password} type={showPassword ? "text" : "password"} name="password" placeholder="Enter your password" onChange={handleChange} required/>
+                            <input className="p-2 border border-gray-400 rounded-full w-full pr-10" value={formData.password} type={showPassword ? "text" : "password"} name="password" placeholder="Enter your password" onChange={handleChange} required/>
                             <button type="button" onClick={() => setShowPassword((prev) => !prev)} className="cursor-pointer absolute right-3 text-gray-400 hover:text-gray-700">{showPassword ? <FaEyeSlash /> : <FaEye />}</button>
                         </div>    
                     </div>
+                    <div className="flex justify-center mt-3 mb-3">
+                        <a href="/login" className="text-violet-600 hover:underline text-sm">Already have an account?</a>
+                    </div>
                     <div className="flex justify-center mb-4 px-4 py-3">
-                        <button type="submit" className="cursor-pointer bg-violet-500 text-white p-2  px-8 rounded-3xl hover:bg-violet-700 transition ease-in-out duration-200">Sign Up</button>
+                        <button type="submit" className="cursor-pointer bg-violet-500 text-white p-2 px-13 rounded-3xl hover:bg-violet-700 transition ease-in-out duration-200">Sign Up</button>
                     </div>
                     {formError && <p className="text-red-500 text-sm mb-3 text-center">{formError}</p>}
                 </form>
