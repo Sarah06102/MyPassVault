@@ -95,7 +95,7 @@ const Dashboard: React.FC = () => {
             )}
             {/* Greeting */}
             <div className="items-center mt-25 flex pl-15 gap-12">
-                <div className="bg-white flex relative flex-col p-15 gap-3 border rounded-3xl border-gray-300 shadow-md">
+                <div className="bg-white flex relative flex-col p-15 gap-3 border rounded-3xl border-gray-300 shadow-md w-120">
                     <h1 className="font-extrabold text-3xl">Hi, {userFirstName || 'Loading...'}!</h1>
                     <p className="text-gray-500">Welcome to MyPassVault, your personal password manager.<br></br> Here, you can save your own passwords or generated passwords for different platforms.</p>
                 </div>
@@ -103,15 +103,15 @@ const Dashboard: React.FC = () => {
                 <div className="relative flex flex-col md:flex-row gap-4 items-start">
                     <div className="flex items-center gap-2">
                         <div className="flex flex-col gap-8">
-                            <div className="flex items-center border border-gray-300 rounded-full px-4 py-3 w-150 bg-white text-gray-700 placeholder-gray-400">
+                            <div className="flex items-center border border-gray-300 rounded-full px-4 py-3 w-110 bg-white text-gray-700 placeholder-gray-400">
                                 <FaSearch className="text-gray-400 mr-2"/>
                                 <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} type="text" placeholder="Search passwords..." className="flex-grow outline-none bg-transparent text-sm"></input>
                             </div>
-                            <button onClick={() => setShowAddForm((prev) => !prev)} className="cursor-pointer bg-violet-500 hover:bg-violet-600 ml-53 text-white py-2 w-45 rounded-4xl transition-all">{showAddForm ? "Close Form" : "Add New Password"}</button>
+                            <button onClick={() => setShowAddForm((prev) => !prev)} className="cursor-pointer bg-violet-500 hover:bg-violet-600 ml-32 text-white py-2 w-45 rounded-4xl transition-all">{showAddForm ? "Close Form" : "Add New Password"}</button>
                         </div>
                         
                         {showAddForm && (
-                            <div className="absolute pt-40 right-0 left-160 p-4 flex flex-col justify-start">
+                            <div className="absolute pt-17 right-0 left-125 p-4 flex flex-col justify-start">
                                 <div className="mt-10 bg-white p-4 rounded-xl shadow-md border border-gray-300 flex flex-col gap-3 w-80"> 
                                     <h3 className="font-semibold text-lg">Add New Password</h3>
                                     
@@ -136,9 +136,9 @@ const Dashboard: React.FC = () => {
                 </div>
             </div>
             {/* Password Entries */}
-            <div className="mt-60 ml-6 px-10 grid grid-cols-1 md:grid-cols-5">
+            <div className="mt-50 ml-6 px-10 grid grid-cols-3 md:grid-cols-5 gap-x-1 gap-y-6 mb-20">
                 {passwordEntries.filter((entry) => entry.site_name.toLowerCase().includes(searchTerm.toLowerCase())).map((entry) => (
-                    <div key={entry.id} className="rounded-xl bg-white p-4 shadow-md flex flex-col items-start gap-2 max-w-xs">
+                    <div key={entry.id} className="rounded-xl bg-white p-4 shadow-md flex flex-col items-start gap-2 w-65">
                         
                         <div className="flex items-center gap-3 mb-2">
                             {entry.logo_url && ( <img src={entry.logo_url} alt={entry.site_name} className="w-8 h-8 object-contain"/> )}

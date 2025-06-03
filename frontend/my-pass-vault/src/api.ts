@@ -62,13 +62,13 @@ export const login = async (userData: LoginData) => {
 };
 
 export const fetchPassword = async () => {
-    const response = await fetchWithRefresh(`${apiUrl}/passwords/`);
+    const response = await fetchWithRefresh(`/api/passwords/`);
     if (!response.ok) throw new Error('Failed to fetch passwords.');
     return response.json();
 };
 
 export const createPassword = async (data: any) => {
-    const response = await fetchWithRefresh(`${apiUrl}/passwords/`, {
+    const response = await fetchWithRefresh(`/api/passwords/`, {
         method: 'POST',
         body: JSON.stringify(data),
     });
@@ -77,7 +77,7 @@ export const createPassword = async (data: any) => {
 };
 
 export const updatePassword = async (id: number, data: any) => {
-    const response = await fetchWithRefresh(`${apiUrl}/passwords/${id}/`, {
+    const response = await fetchWithRefresh(`/passwords/${id}/`, {
         method:'PUT',
         body: JSON.stringify(data),
     });
@@ -86,7 +86,7 @@ export const updatePassword = async (id: number, data: any) => {
 };
 
 export const deletePassword = async (id: number) => {
-    const response = await fetchWithRefresh(`${apiUrl}/passwords/${id}/`, {
+    const response = await fetchWithRefresh(`/api/passwords/${id}/`, {
         method: 'DELETE',
     });
     if (!response.ok) throw new Error('Failed to delete password.');
@@ -100,7 +100,7 @@ export const fetchWithRefresh = async (url: string, options: any = {}) => {
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
     };
 
-    let response = await fetch(`${apiUrl}${url}`, {
+    let response = await fetch(`${apiUrl}${url.startsWith('/') ? url : `/${url}`}`, {
         ...options,
         headers: {
           ...options.headers,
