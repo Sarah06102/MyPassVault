@@ -11,7 +11,6 @@ from django.http import JsonResponse
 from rest_framework.permissions import IsAuthenticated
 from django.views.decorators.csrf import ensure_csrf_cookie
 
-
 # Create your views here.
 
 #Signup API
