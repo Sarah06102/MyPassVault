@@ -19,7 +19,7 @@ const Settings: React.FC  = () => {
   useEffect(() => {
       const fetchUserProfile = async () => {
         try {
-          const response = await fetchWithRefresh('/api/profile/');
+          const response = await fetchWithRefresh('/profile/');
           if (!response.ok) throw new Error('Failed to fetch profile');
             const data = await response.json();
               setUserEmail(data.email);
@@ -35,7 +35,7 @@ const Settings: React.FC  = () => {
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetchWithRefresh('/api/profile/update/', {
+      const response = await fetchWithRefresh('/profile/update/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -17,7 +17,7 @@ const Help: React.FC = () => {
   useEffect(() => {
       const fetchUserProfile = async () => {
         try {
-          const response = await fetchWithRefresh('/api/profile/');
+          const response = await fetchWithRefresh('/profile/');
           if (!response.ok) throw new Error('Failed to fetch profile');
             const data = await response.json();
               setUserEmail(data.email);
