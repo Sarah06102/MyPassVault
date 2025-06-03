@@ -124,7 +124,7 @@ export const fetchWithRefresh = async (url: string, options: any = {}) => {
                 localStorage.setItem('refresh_token', refreshData.refresh);
             }
 
-            response = await fetch(url, {
+            response = await fetch(`${apiUrl}${url}`, {
                 ...options,
                 headers: {
                     ...options.headers,
