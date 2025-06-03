@@ -14,7 +14,7 @@ RUN pip install -r requirements.txt
 
 # Copy app files
 COPY backend/mypassvault /app
-COPY backend/manage.py /app
+COPY backend/mypassvault/manage.py /app
 
 # Start server with gunicorn
-CMD gunicorn mypassvault.wsgi:application --bind 0.0.0.0:$PORT
+CMD gunicorn mypassvault.wsgi:application --bind 0.0.0.0:8000
