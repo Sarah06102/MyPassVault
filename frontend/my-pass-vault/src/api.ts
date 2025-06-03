@@ -100,7 +100,7 @@ export const fetchWithRefresh = async (url: string, options: any = {}) => {
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
     };
 
-    let response = await fetch(url, {
+    let response = await fetch(`${apiUrl}${url}`, {
         ...options,
         headers: {
           ...options.headers,
