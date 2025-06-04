@@ -15,10 +15,6 @@ from datetime import timedelta
 import ssl
 import dj_database_url
 import os
-from dotenv import load_dotenv
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,16 +27,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!$crmupo6_w_(vso#-j)*-gz-be17f%d2a+sgsjb)ehg19n7bi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-# ALLOWED_HOSTS = [
-#     'mypassvault-production.up.railway.app',
-#     'localhost',
-#     '127.0.0.1',
-#     'my-pass-vault.vercel.app',
-# ]
+if DEBUG:
+    from dotenv import load_dotenv
+    load_dotenv(os.path.join(BASE_DIR, '.env'))
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'mypassvault-production.up.railway.app',
+    'localhost',
+    '127.0.0.1',
+    'my-pass-vault.vercel.app',
+]
+
 
 # Application definition
 
@@ -134,10 +133,10 @@ WSGI_APPLICATION = 'mypassvault.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    'default': dj_database_url.config()
 }
 
-print("⚡️ Using database:", DATABASES['default'])
+print("DATABASE_URL:", os.environ.get("DATABASE_URL"))
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
