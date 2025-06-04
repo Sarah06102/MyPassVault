@@ -14,6 +14,7 @@ from pathlib import Path
 from datetime import timedelta
 import ssl
 import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -50,6 +51,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'widget_tweaks',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -112,9 +115,7 @@ WSGI_APPLICATION = 'mypassvault.wsgi.application'
 
 
 
-DATABASES = {
-    'default': dj_database_url.config(default='postgresql://postgres:VpWptWmKKkQgrkJkQtMTKmayWYFUbcWU@postgres.railway.internal:5432/railway')
-}
+DATABASES = { 'default': dj_database_url.config(default=os.environ.get('DATABASE_URL')) }
 
 
 
