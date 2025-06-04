@@ -10,9 +10,10 @@ import string
 from django.http import JsonResponse
 from rest_framework.permissions import IsAuthenticated
 from django.views.decorators.csrf import ensure_csrf_cookie
+import logging
 
 # Create your views here.
-
+logger = logging.getLogger(__name__)
 #Signup API
 class SignUp(APIView):
     def post(self, request):
@@ -27,15 +28,24 @@ class SignUp(APIView):
 #Login API
 class Login(APIView):
     def post(self, request):
-        data = request.data
-        user = CustomUser.objects.filter(email=data['email']).first()
-        if user is None:
-            return Response({"message": "User does not exist."}, status=status.HTTP_404_NOT_FOUND)
-        if not user.check_password(data['password']):
-            return Response({"message": "Invalid password."}, status=status.HTTP_400_BAD_REQUEST)
+        logger.debug("Login view accessed")
+        try:
+            data = request.data
+            logger.debug(f"Request data: {data}")
+            user = CustomUser.objects.filter(email=data['email']).first()
+            if user is None:
+                logger.debug("User does not exist.")
+                return Response({"message": "User does not exist."}, status=status.HTTP_404_NOT_FOUND)
+            if not user.check_password(data['password']):
+                logger.debug("Invalid password.")
+                return Response({"message": "Invalid password."}, status=status.HTTP_400_BAD_REQUEST)
         
-        token = RefreshToken.for_user(user)
-        return Response({"message": "Login Successful", "Success": True, "token": str(token), "access": str(token.access_token),})
+            token = RefreshToken.for_user(user)
+            logger.debug("Login successful. Token generated.")
+            return Response({"message": "Login Successful", "Success": True, "token": str(token), "access": str(token.access_token),})
+        except Exception as e:
+            logger.error(f"Login error: {e}", exc_info=True)
+            return Response({"message": "Internal server error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 class UserProfileView(APIView):
     permission_classes = [IsAuthenticated]
