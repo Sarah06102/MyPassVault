@@ -63,20 +63,20 @@ const SignUp: React.FC = () => {
                     </div>
                     <div className="flex flex-col px-8 py-1">
                         <label htmlFor="first_name" className="mb-1 text-sm font-medium">First Name</label>
-                        <input className="p-2 border border-gray-400 rounded-full" value={formData.first_name} type="text" name="first_name" placeholder="Enter your first name" onChange={handleChange} required/>
+                        <input className="p-2 border border-gray-400 rounded-full" id="first_name" value={formData.first_name} type="text" name="first_name" placeholder="Enter your first name" onChange={handleChange} required/>
                     </div>
                     <div className="flex flex-col px-8 py-1">
                         <label htmlFor="last_name" className="mb-1 text-sm font-medium">Last Name</label>
-                        <input className="p-2 border border-gray-400 rounded-full" value={formData.last_name} type="text" name="last_name" placeholder="Enter your last name" onChange={handleChange} required/>
+                        <input className="p-2 border border-gray-400 rounded-full" id="last_name" value={formData.last_name} type="text" name="last_name" placeholder="Enter your last name" onChange={handleChange} required/>
                     </div>
                     <div className="flex flex-col px-8 py-1">
                         <label htmlFor="email" className="mb-1 text-sm font-medium">Email</label>
-                        <input className="p-2 border border-gray-400 rounded-full" value={formData.email} type="email" name="email" placeholder="Enter your email" onChange={handleChange} required/>
+                        <input className="p-2 border border-gray-400 rounded-full" id="email" value={formData.email} type="email" name="email" placeholder="Enter your email" onChange={handleChange} required/>
                     </div>
                     <div className="flex flex-col px-8 py-1">
                         <label htmlFor="password" className="mb-1 text-sm font-medium">Password</label>
                         <div className="relative flex items-center">
-                            <input className="p-2 border border-gray-400 rounded-full w-full pr-10" value={formData.password} type={showPassword ? "text" : "password"} name="password" placeholder="Enter your password" onChange={handleChange} required/>
+                            <input className="p-2 border border-gray-400 rounded-full w-full pr-10" id="password" value={formData.password} type={showPassword ? "text" : "password"} name="password" placeholder="Enter your password" onChange={handleChange} required/>
                             <button type="button" onClick={() => setShowPassword((prev) => !prev)} className="cursor-pointer absolute right-3 text-gray-400 hover:text-gray-700">{showPassword ? <FaEyeSlash /> : <FaEye />}</button>
                         </div>    
                     </div>

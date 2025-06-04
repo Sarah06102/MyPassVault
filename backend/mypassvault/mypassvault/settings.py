@@ -15,6 +15,10 @@ from datetime import timedelta
 import ssl
 import dj_database_url
 import os
+from dotenv import load_dotenv
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,13 +33,14 @@ SECRET_KEY = 'django-insecure-!$crmupo6_w_(vso#-j)*-gz-be17f%d2a+sgsjb)ehg19n7bi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'mypassvault-production.up.railway.app',
-    'localhost',
-    '127.0.0.1',
-    'my-pass-vault.vercel.app',
-]
+# ALLOWED_HOSTS = [
+#     'mypassvault-production.up.railway.app',
+#     'localhost',
+#     '127.0.0.1',
+#     'my-pass-vault.vercel.app',
+# ]
 
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -52,8 +57,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
-
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CORS_ALLOW_HEADERS = [
@@ -67,15 +70,18 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
+
 CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'https://my-pass-vault.vercel.app',
-    ]
+]
+
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173',
     'https://my-pass-vault.vercel.app'
-    ]
+]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -90,7 +96,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'mypassvault.urls'
 
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 TEMPLATES = [
     {
@@ -115,9 +120,24 @@ WSGI_APPLICATION = 'mypassvault.wsgi.application'
 
 
 
-DATABASES = { 'default': dj_database_url.config(default=os.environ.get('DATABASE_URL')) }
+# DATABASES = { 'default': dj_database_url.config(default=os.environ.get('DATABASE_URL')) }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql', 
+#         'NAME': 'mypassvault',                    
+#         'USER': 'sarahhussain',   
+#         'PASSWORD': 'Hdzs.786',         
+#         'HOST': 'localhost',                  
+#         'PORT': '5432',                            
+#     }
+# }
 
 
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+}
+
+print("⚡️ Using database:", DATABASES['default'])
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

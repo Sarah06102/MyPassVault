@@ -17,4 +17,4 @@ COPY backend/mypassvault /app
 COPY backend/mypassvault/manage.py /app
 
 # Start server with gunicorn
-CMD gunicorn mypassvault.wsgi:application --bind 0.0.0.0:8000
+CMD gunicorn mypassvault.wsgi:application --bind 0.0.0.0:${PORT:-8000}

@@ -55,12 +55,12 @@ const Login: React.FC = () => {
                     </div>
                     <div className="flex flex-col px-8 py-1 pt-5">
                         <label htmlFor="email" className="mb-1 text-sm font-medium">Email</label>
-                        <input className="p-2 border border-gray-400 rounded-full" value={formData.email} type="email" name="email" placeholder="Enter your email" onChange={handleChange} required/>
+                        <input className="p-2 border border-gray-400 rounded-full" id="email" value={formData.email} type="email" name="email" placeholder="Enter your email" onChange={handleChange} required/>
                     </div>
                     <div className="flex flex-col px-8 py-1">
                         <label htmlFor="password" className="mb-1 text-sm font-medium">Password</label>
                         <div className="relative flex items-center">
-                            <input className="p-2 border border-gray-400 rounded-full w-full pr-10" type={showPassword ? "text" : "password"} value={formData.password} name="password" placeholder="Enter your password" onChange={handleChange} required/>
+                            <input className="p-2 border border-gray-400 rounded-full w-full pr-10" type={showPassword ? "text" : "password"} value={formData.password} name="password" id="password" placeholder="Enter your password" onChange={handleChange} required/>
                             <button type="button" onClick={() => setShowPassword((prev) => !prev)} className="cursor-pointer absolute right-3 text-gray-400 hover:text-gray-700">{showPassword ? <FaEyeSlash /> : <FaEye />}</button>
                         </div>
                     </div>
