@@ -11,6 +11,8 @@ from django.http import JsonResponse
 from rest_framework.permissions import IsAuthenticated
 from django.views.decorators.csrf import ensure_csrf_cookie
 import logging
+from django.db import connection
+from rest_framework.decorators import api_view
 
 # Create your views here.
 logger = logging.getLogger(__name__)
@@ -139,3 +141,14 @@ class PasswordEntryRetrieveUpdateDeleteAPIView(APIView):
 @ensure_csrf_cookie
 def get_csrf_token(request):
     return JsonResponse({'message': 'CSRF token set'})
+
+
+@api_view(['GET'])
+def db_check(request):
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1;")
+            row = cursor.fetchone()
+        return Response({"db_connection": "ok", "result": row})
+    except Exception as e:
+        return Response({"db_connection": "failed", "error": str(e)})
