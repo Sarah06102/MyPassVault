@@ -114,19 +114,19 @@ const Home: React.FC<HomeProps> = ({ title }) => {
               {/* Checkbox options */}
               <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                 <div className="flex items-center gap-2 whitespace-nowrap">
-                  <input className="accent-violet-600" id="uppercase" checked={includeUppercase} onChange={(e) => setIncludeUppercase(e.target.checked)} type="checkbox"/>
+                  <input className="accent-violet-600 cursor-pointer" id="uppercase" checked={includeUppercase} onChange={(e) => setIncludeUppercase(e.target.checked)} type="checkbox"/>
                   <label htmlFor="uppercase" className="mb-1">Include Uppercase(A-Z)</label>
                 </div>
                 <div className="flex items-center gap-2 whitespace-nowrap">
-                  <input className="accent-violet-600" id="lowercase" checked={includeLowercase} onChange={(e) => setIncludeLowercase(e.target.checked)} type="checkbox"/>
+                  <input className="accent-violet-600 cursor-pointer" id="lowercase" checked={includeLowercase} onChange={(e) => setIncludeLowercase(e.target.checked)} type="checkbox"/>
                   <label htmlFor="lowercase" className="mb-1">Include Lowercase(a-z)</label>
                 </div>
                 <div className="flex items-center gap-2 whitespace-nowrap">
-                  <input className="accent-violet-600" id="numbers" checked={includeNumbers} onChange={(e) => setIncludeNumbers(e.target.checked)} type="checkbox"/>
+                  <input className="accent-violet-600 cursor-pointer" id="numbers" checked={includeNumbers} onChange={(e) => setIncludeNumbers(e.target.checked)} type="checkbox"/>
                   <label htmlFor="numbers" className="mb-1">Include Numbers</label>
                 </div>
                 <div className="flex items-center gap-2 whitespace-nowrap">
-                  <input className="accent-violet-600" id="symbols" checked={includeSymbols} onChange={(e) => setIncludeSymbols(e.target.checked)} type="checkbox"/>
+                  <input className="accent-violet-600 cursor-pointer" id="symbols" checked={includeSymbols} onChange={(e) => setIncludeSymbols(e.target.checked)} type="checkbox"/>
                   <label htmlFor="symbols" className="mb-1">Include Symbols</label>
                 </div>
               </div>
