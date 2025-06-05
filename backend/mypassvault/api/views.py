@@ -152,3 +152,5 @@ def db_check(request):
         return Response({"db_connection": "ok", "result": row})
     except Exception as e:
         return Response({"db_connection": "failed", "error": str(e)})
+    
+    
