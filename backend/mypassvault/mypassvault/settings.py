@@ -50,6 +50,7 @@ if DEBUG:
 
 ALLOWED_HOSTS = [
     'mypassvault-production.up.railway.app',
+    'mypassvault.onrender.com',
     'localhost',
     '127.0.0.1',
     'my-pass-vault.vercel.app',
