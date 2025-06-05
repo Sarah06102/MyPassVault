@@ -39,7 +39,7 @@ const GeneratePassword: React.FC = () => {
     const fetchPassword = async (length: number) => {
       try {
         //Get request to backend for password
-        const response = await fetch(`/generate-password/?length=${length}&uppercase=${includeUppercase}&lowercase=${includeLowercase}&numbers=${includeNumbers}&symbols=${includeSymbols}`);
+        const response = await fetchWithRefresh(`/generate-password/?length=${length}&uppercase=${includeUppercase}&lowercase=${includeLowercase}&numbers=${includeNumbers}&symbols=${includeSymbols}`);
         //Convert fetched response into json
         const data: {password: string} = await response.json(); 
         console.log('Fetched password:', data.password);
