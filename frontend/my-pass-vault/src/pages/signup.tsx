@@ -56,7 +56,7 @@ const SignUp: React.FC = () => {
     return (
         <>
             <NavBar/>
-            <div className="bg-violet-50 flex flex-col items-center justify-center min-h-screen">
+            <div className="bg-violet-50 flex flex-col items-center justify-center min-h-screen px-4 sm:px-0 pt-20">
                 <form onSubmit={handleSubmit} className="bg-white rounded shadow-md w-full max-w-md space-y-4">
                     <div className="w-full">
                         <h1 className="rounded-t font-semibold text-lg w-full text-center  bg-violet-500 text-white p-3">Create an Account</h1>

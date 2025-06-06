@@ -97,23 +97,23 @@ const Home: React.FC<HomeProps> = ({ title }) => {
   return (
     <>
       {/* Nav bar */}
-      <NavBar/>
+      <NavBar />
       <div className="bg-violet-50 overflow-x-hidden">
-        <section id="main">
-          <div className="gap-40 md:flex-row min-h-screen flex-col flex justify-center items-center p-8 rounded">
+        <section id="main" className="pt-30">
+          <div className="flex flex-col md:flex-row gap-10 md:gap-40 min-h-screen justify-center items-center p-8 md:p-10 rounded">
           {/* Title */}
-            <div className="flex flex-col items-start mx-20">
+            <div className="justify-center flex flex-col items-center md:items-start mx-4 md:mx-20 text-center md:text-left">
               <h1 className="text-5xl text-gray-800 font-extrabold mb-4">{ title }</h1>
               <h3 className="text-lg text-gray-500 pl-3">Password security, made simple.</h3>
-              <div className="flex gap-4 mt-10 ml-10">
+              <div className="flex gap-4 mt-10 mx-auto">
                 <FaLockOpen size={50} className="text-gray-600"/><FaArrowRightLong size={50}/><FaLock size={50} className="text-gray-600"/>
               </div>
             </div>
         
             {/* Password Generator */}
-            <div className="bg-white rounded-2xl shadow-lg p-18 flex flex-col gap-6">
+            <div className="bg-white rounded-2xl shadow-lg p-4 md:p-8 flex flex-col gap-6 w-full max-w-xl">
               {/* Checkbox options */}
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
                 <div className="flex items-center gap-2 whitespace-nowrap">
                   <input className="accent-violet-600 cursor-pointer" id="uppercase" checked={includeUppercase} onChange={(e) => setIncludeUppercase(e.target.checked)} type="checkbox"/>
                   <label htmlFor="uppercase" className="mb-1">Include Uppercase(A-Z)</label>
@@ -139,13 +139,13 @@ const Home: React.FC<HomeProps> = ({ title }) => {
                   <input className="w-14 p-1 border border-gray-300 rounded text-center shadow-inner" id="lengthInput" type="number" min="4" max="36" value={length} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newLength = Number(e.target.value); if (newLength >= 4 && newLength <= 36) {
                     setLength(newLength);}}} />
                   {/* Slider */}
-                  <input id="lengthSlider" className="cursor-pointer accent-violet-600 w-64" type="range" min="4" max="36" value={length} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setLength(Number(e.target.value))}/>
+                  <input id="lengthSlider" className="cursor-pointer accent-violet-600 w-full md:w-64" type="range" min="4" max="36" value={length} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setLength(Number(e.target.value))}/>
                 </div>
 
                 {/* Show Password */}
                 <div className="mt-6 flex justify-center text-center">
                   <label className="font-medium text-lg">Your Password:</label>
-                  <span className="ml-2 shadow-inner border px-3 border-gray-300 rounded">{generatedPassword ? generatedPassword : null}</span>
+                  <span className="bg-gray-50 py-1 overflow-x-auto break-all ml-2 shadow-inner border px-3 border-gray-300 rounded">{generatedPassword ? generatedPassword : null}</span>
                 </div>
                 <div className="flex gap-2 mt-10">
                   <button className="cursor-pointer hover:bg-violet-700 transition-colors duration-300 flex bg-violet-600 text-white py-2 px-3 rounded-full" onClick={handleCopyPassword}>Copy password</button>
@@ -156,14 +156,14 @@ const Home: React.FC<HomeProps> = ({ title }) => {
           </div>
         </section>
         {/* About Section */}
-        <section className="mt-30 text-center scroll-mt-90" id="about">
+        <section className="mt-30 text-center scroll-mt-90 px-4 sm:px-0" id="about">
           <h2 className="text-3xl font-bold mb-4">What is MyPassVault?</h2>
           <p className="max-w-xl mx-auto text-gray-600">
             MyPassVault is a secure and easy-to-use password generator that helps you create strong passwords to protect your online accounts.
           </p>
         </section>  
         {/* Tools Section */}
-        <section className="scroll-mt-50 mt-50 text-center bg-violet" id="tools">
+        <section className="scroll-mt-50 mt-50 text-center bg-violet px-4 sm:px-0" id="tools">
           <h2 className="text-3xl font-extrabold text-gray-800 mb-10 text-center">Tools</h2>
           <ul className="space-y-6 text-center flex flex-col items-center border border-gray-400 shadow-inner shadow-gray-300/80 bg-white rounded-2xl m-10 p-5 max-w-4xl mx-auto">
             <li className="flex flex-col items-center gap-4">
@@ -181,7 +181,7 @@ const Home: React.FC<HomeProps> = ({ title }) => {
           </ul>
         </section>
         {/* Features Section */}
-        <section className="scroll-mt-20 text-center p-30 mt-20" id="features">
+        <section className="scroll-mt-20 text-center p-30 mt-20 px-4 sm:px-0" id="features">
           <div className="max-w-6xl mx-auto px-4">
             <h2 className="text-3xl font-bold mb-10">Features</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

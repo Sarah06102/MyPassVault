@@ -94,7 +94,7 @@ const Dashboard: React.FC = () => {
                 <div className={`fixed inset-0 backdrop-blur-sm bg-opacity-30 z-40 transition-opacity duration-300 ease-in-out ${isSidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}></div>
             )}
             {/* Greeting */}
-            <div className="items-center mt-25 flex pl-15 gap-12">
+            <div className="flex flex-col md:flex-row items-center mt-25 pl-15 gap-12">
                 <div className="bg-white flex relative flex-col p-15 gap-3 border rounded-3xl border-gray-300 shadow-md w-120">
                     <h1 className="font-extrabold text-3xl">Hi, {userFirstName || 'Loading...'}!</h1>
                     <p className="text-gray-500">Welcome to MyPassVault, your personal password manager.<br></br> Here, you can save your own passwords or generated passwords for different platforms.</p>
@@ -107,12 +107,12 @@ const Dashboard: React.FC = () => {
                                 <FaSearch className="text-gray-400 mr-2"/>
                                 <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} type="text" placeholder="Search passwords..." className="flex-grow outline-none bg-transparent text-sm"></input>
                             </div>
-                            <button onClick={() => setShowAddForm((prev) => !prev)} className="cursor-pointer bg-violet-500 hover:bg-violet-600 ml-32 text-white py-2 w-45 rounded-4xl transition-all">{showAddForm ? "Close Form" : "Add New Password"}</button>
+                            <button onClick={() => setShowAddForm((prev) => !prev)} className="cursor-pointer bg-violet-500 md:w-45 hover:bg-violet-600 ml-32 text-white py-2 w-45 rounded-4xl transition-all">{showAddForm ? "Close Form" : "Add New Password"}</button>
                         </div>
                         
                         {showAddForm && (
-                            <div className="absolute pt-17 right-0 left-125 p-4 flex flex-col justify-start">
-                                <div className="mt-10 bg-white p-4 rounded-xl shadow-md border border-gray-300 flex flex-col gap-3 w-80"> 
+                            <div className="w-full md:absolute md:pt-17 md:right-0 md:left-125 p-4 flex flex-col justify-start">
+                                <div className="mt-4 md:mt-10 bg-white p-4 rounded-xl shadow-md border border-gray-300 flex flex-col gap-3 w-full md:w-80"> 
                                     <h3 className="font-semibold text-lg">Add New Password</h3>
                                     
                                     <div className="flex gap-2">

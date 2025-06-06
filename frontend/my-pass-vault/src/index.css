@@ -29,3 +29,16 @@ scroll-behavior: smooth;
     @apply scale-x-100 origin-bottom-left;
   }  
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;  
+}
+
+.account-container:hover .account-dropdown {
+  display: flex !important;
+}
