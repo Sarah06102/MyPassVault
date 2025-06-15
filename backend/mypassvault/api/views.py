@@ -60,6 +60,24 @@ class UserProfileView(APIView):
             "last_name": user.last_name,
         })
 
+    def put(self, request):
+        user = request.user
+        data = request.data
+
+        user.first_name = data.get('first_name', user.first_name)
+        user.last_name = data.get('last_name', user.last_name)
+        user.email = data.get('email', user.email)
+        if 'password' in data and data['password']:
+            user.set_password(data['password'])
+
+        user.save()
+
+        return Response({
+            "email": user.email,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+        })
+
 #Password Generator
 def generate_random_password(request):
     #Get from frontend
