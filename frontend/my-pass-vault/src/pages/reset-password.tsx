@@ -10,7 +10,7 @@ const ResetPassword: React.FC = () => {
         e.preventDefault();
 
         try {
-            await fetch('/api/csrf/', { credentials: 'include' });
+            await fetch(`${apiUrl}/csrf/`, { credentials: 'include' });
             const csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken='))?.split('=')[1] || '';
             const formData = new URLSearchParams();
             formData.append('email', enteredEmail);
