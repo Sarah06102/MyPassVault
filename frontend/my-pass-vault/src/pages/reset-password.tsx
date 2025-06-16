@@ -68,7 +68,7 @@ const ResetPassword: React.FC = () => {
 
                         <div className="flex flex-col px-8 py-1">
                             <label htmlFor="email" className="mb-1 text-sm font-medium">Email</label>
-                            <input type="email" value={enteredEmail} onChange={(e) => setEnteredEmail(e.target.value)} placeholder="Enter your email" className="p-2 border border-gray-400 rounded-lg w-full" required/>
+                            <input type="email" value={enteredEmail} onChange={(e) => setEnteredEmail(e.target.value)} placeholder="Enter your email" className="p-2 border border-gray-400 rounded-lg w-full" name= "email" required/>
                             
                         </div>
                         <div className="flex justify-center mb-4 px-4 py-3">
