@@ -16,6 +16,9 @@ from rest_framework.decorators import api_view
 from django.middleware.csrf import get_token
 from django.contrib.auth.views import PasswordResetConfirmView
 from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.contrib.auth.views import PasswordResetView
 
 # Create your views here.
 logger = logging.getLogger(__name__)
@@ -186,3 +189,10 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
         print("Password reset failed with errors:")
         print(form.errors)
         return super().form_invalid(form)
+    
+
+@method_decorator(csrf_exempt, name='dispatch')
+class MobilePasswordResetView(PasswordResetView):
+    email_template_name = 'registration/password_reset_email.html'
+    html_email_template_name = 'registration/password_reset_email.html'
+    subject_template_name = 'registration/password_reset_subject.txt'
