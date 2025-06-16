@@ -161,10 +161,8 @@ class PasswordEntryRetrieveUpdateDeleteAPIView(APIView):
 def get_csrf_token(request):
     token = get_token(request)
     print(f"CSRF token set: {token}")
-    return JsonResponse({'message': 'CSRF token set'})
+    return JsonResponse({'message': 'CSRF token set', 'token': token})
     
-
-
 @api_view(['GET'])
 def db_check(request):
     try:
