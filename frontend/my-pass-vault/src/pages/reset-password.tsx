@@ -13,7 +13,7 @@ const ResetPassword: React.FC = () => {
             const csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken='))?.split('=')[1] || '';
             const formData = new URLSearchParams();
             formData.append('email', enteredEmail);
-            const response = await fetch('/api/password_reset/', {
+            const response = await fetch('/password_reset/', {
               method: 'POST',
               headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-CSRFToken': csrfToken, },
               credentials: 'include',
