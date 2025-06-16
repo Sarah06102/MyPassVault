@@ -227,8 +227,8 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 ssl._create_default_https_context = ssl._create_unverified_context
 
 CSRF_COOKIE_HTTPONLY = False
-CSRF_COOKIE_SECURE = True   
-SESSION_COOKIE_SECURE = True
-
+CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'None'
+
+SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_SAMESITE = 'None'

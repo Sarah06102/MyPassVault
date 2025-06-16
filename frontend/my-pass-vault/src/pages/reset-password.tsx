@@ -9,9 +9,9 @@ const ResetPassword: React.FC = () => {
 
     useEffect(() => {
         const fetchCsrfToken = async () => {
-            await fetch(`${apiUrl}/csrf/`, { credentials: 'include' });
-            const token = document.cookie.split('; ').find((row) => row.startsWith('csrftoken='))?.split('=')[1];
-            if (token) setCsrfToken(token);
+            const res = await fetch(`${apiUrl}/csrf/`, { credentials: 'include' });
+            const data = await res.json();
+            if (data.csrfToken) setCsrfToken(data.csrfToken);
         };
         fetchCsrfToken();
     }, []);
