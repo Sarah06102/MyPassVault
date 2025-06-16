@@ -94,6 +94,8 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'https://my-pass-vault.vercel.app',
+    "exp://",
+    "http://192.168.1.104:19006",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
