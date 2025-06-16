@@ -178,6 +178,11 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     template_name = 'registration/password_reset_confirm.html'
     success_url = reverse_lazy('password_reset_complete')
 
+    def form_valid(self, form):
+        print("Password reset successful for:", form.user)
+        return super().form_valid(form)
+
     def form_invalid(self, form):
-        print("Password reset failed:", form.errors)
+        print("Password reset failed with errors:")
+        print(form.errors)
         return super().form_invalid(form)
