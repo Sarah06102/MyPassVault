@@ -19,5 +19,5 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('csrf/', get_csrf_token),
     path('api/db/', db_check),
-    path('mobile/password_reset/', MobilePasswordResetView.as_view(), name='mobile_password_reset'),
+    path('api/mobile/password_reset/', MobilePasswordResetView.as_view(), name='mobile_password_reset'),
 ]
