@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../components/nav-bar';
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const ResetPassword: React.FC = () => {
     const [emailSent, setEmailSent] = useState(false);
     const [enteredEmail, setEnteredEmail] = useState('');
+    const [csrfToken, setCsrfToken] = useState('');
+
+    useEffect(() => {
+        const fetchCsrfToken = async () => {
+            await fetch(`${apiUrl}/csrf/`, { credentials: 'include' });
+            const token = document.cookie.split('; ').find((row) => row.startsWith('csrftoken='))?.split('=')[1];
+            if (token) setCsrfToken(token);
+        };
+        fetchCsrfToken();
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (!csrfToken) {
+            alert('CSRF token not available. Please refresh and try again.');
+            return;
+        }
+
         try {
-            await fetch(`${apiUrl}/csrf/`, { credentials: 'include' });
-            const csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken='))?.split('=')[1] || '';
             const formData = new URLSearchParams();
             formData.append('email', enteredEmail);
             const response = await fetch(`${apiUrl}/password_reset/`, {
               method: 'POST',
-              headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-CSRFToken': csrfToken, },
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-CSRFToken': csrfToken, 'Referer': 'https://my-pass-vault.vercel.app/reset-password', },
               credentials: 'include',
               body: formData.toString(),
             });

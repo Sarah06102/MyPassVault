@@ -98,7 +98,8 @@ CORS_ALLOWED_ORIGINS = [
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173',
-    'https://my-pass-vault.vercel.app'
+    'https://my-pass-vault.vercel.app',
+    'https://mypassvault.onrender.com',
 ]
 
 MIDDLEWARE = [
@@ -224,3 +225,5 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 ssl._create_default_https_context = ssl._create_unverified_context
+
+CSRF_COOKIE_HTTPONLY = False

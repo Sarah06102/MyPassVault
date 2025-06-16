@@ -13,6 +13,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 import logging
 from django.db import connection
 from rest_framework.decorators import api_view
+from django.middleware.csrf import get_token
 
 # Create your views here.
 logger = logging.getLogger(__name__)
@@ -158,7 +159,10 @@ class PasswordEntryRetrieveUpdateDeleteAPIView(APIView):
     
 @ensure_csrf_cookie
 def get_csrf_token(request):
+    token = get_token(request)
+    print(f"CSRF token set: {token}")
     return JsonResponse({'message': 'CSRF token set'})
+    
 
 
 @api_view(['GET'])
