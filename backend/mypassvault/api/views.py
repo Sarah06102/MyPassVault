@@ -171,4 +171,3 @@ def db_check(request):
     except Exception as e:
         return Response({"db_connection": "failed", "error": str(e)})
     
-    
