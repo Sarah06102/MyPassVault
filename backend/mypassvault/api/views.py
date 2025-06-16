@@ -14,6 +14,8 @@ import logging
 from django.db import connection
 from rest_framework.decorators import api_view
 from django.middleware.csrf import get_token
+from django.contrib.auth.views import PasswordResetConfirmView
+from django.urls import reverse_lazy
 
 # Create your views here.
 logger = logging.getLogger(__name__)
@@ -171,3 +173,11 @@ def db_check(request):
         return Response({"db_connection": "ok", "result": row})
     except Exception as e:
         return Response({"db_connection": "failed", "error": str(e)})
+    
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'registration/password_reset_confirm.html'
+    success_url = reverse_lazy('password_reset_complete')
+
+    def form_invalid(self, form):
+        print("Password reset failed:", form.errors)
+        return super().form_invalid(form)
