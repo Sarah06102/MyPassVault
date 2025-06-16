@@ -2,7 +2,7 @@ from django.urls import path, include
 from .views import SignUp, Login, generate_random_password, UserProfileView, PasswordEntryListCreateAPIView, PasswordEntryRetrieveUpdateDeleteAPIView, get_csrf_token, db_check
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.contrib.auth import views as auth_views
-from .views import api_password_reset
+
 
 urlpatterns = [
     path('signup/', SignUp.as_view(), name='signup'),
@@ -19,5 +19,4 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('csrf/', get_csrf_token),
     path('api/db/', db_check),
-    path('api/password_reset/', api_password_reset, name='api_password_reset'),
 ]
